@@ -2,6 +2,10 @@
 
 Aplicación frontend para gestionar leads de One Million Copy SAS. Permite visualizar, filtrar y administrar leads desde distintos embudos de marketing, con dashboard de estadísticas y resumen ejecutivo generado con IA.
 
+## Demo
+
+> URL de deploy disponible tras el despliegue en Vercel.
+
 ## Tecnologías elegidas
 
 | Categoría | Tecnología | Razón |
@@ -75,7 +79,7 @@ La app usa **datos embebidos** (Opción C del enunciado). Los leads de ejemplo s
 src/features/leads/data/mockLeads.ts
 ```
 
-Son 12 leads precargados con todos los campos requeridos. Al crear, editar o eliminar leads, los cambios se persisten en `localStorage` gracias al middleware `persist` de Zustand. Al recargar la página, el estado se restaura automáticamente.
+Son 15 leads precargados con todos los campos requeridos. Al crear, editar o eliminar leads, los cambios se persisten en `localStorage` gracias al middleware `persist` de Zustand. Al recargar la página, el estado se restaura automáticamente.
 
 ## Estructura de carpetas
 
@@ -117,4 +121,6 @@ src/
 - **API key segura**: la key de Groq vive en `.env.local` y se consume únicamente desde `app/api/ai-summary/route.ts` (server-side). Nunca se expone al bundle del cliente.
 - **Sin backend**: 100% frontend según el enunciado. Los datos se gestionan con Zustand + localStorage.
 - **Filtros con useMemo**: se evitó llamar funciones dentro de selectores de Zustand para prevenir re-renders infinitos. Los filtros y la paginación se calculan con `useMemo` en el hook `useLeads`.
-- **Orden por fecha**: los leads se ordenan automáticamente por `createdAt` descendente (más recientes primero) en el store y en el hook.
+- **Orden por fecha**: los leads se ordenan automáticamente por `createdAt` descendente (más recientes primero) por defecto.
+- **Sorting interactivo**: los encabezados de la tabla son clickeables para ordenar por cualquier columna (nombre, email, fuente, presupuesto, estado, fecha) de forma ascendente o descendente.
+- **Dark mode**: implementado con `next-themes`. Respeta la preferencia del sistema por defecto y tiene toggle en el sidebar. Los colores usan tokens semánticos de Shadcn/ui para adaptarse automáticamente.
