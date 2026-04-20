@@ -40,7 +40,8 @@ export function LeadForm({ defaultValues, onSubmit, onCancel, isSubmitting }: Le
     control,
     formState: { errors },
   } = useForm<LeadSchema>({
-    resolver: zodResolver(leadSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(leadSchema) as any,
     defaultValues: {
       name: defaultValues?.name ?? "",
       email: defaultValues?.email ?? "",
